@@ -1,0 +1,44 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+body{
+  height: 2000px;
+}
+.Head-Con{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.First{
+  flex-grow: 4;
+  color: #fff;
+  background-color: #1c0069;
+  padding-left: 1vw;
+  padding-top: 2vw;
+  padding-bottom: 4vw;
+}
+.P_Container{
+}
+#Open {
+  flex-grow: 0.5;
+}
+#Var_C{
+  display: none;
+  width: 15vw;
+  background-color: #9f8cd4;
+}
+.Var{
+  position: fixed;
+}
+.Place{
+  padding: 50px;
+}
+.Place > h2{
+  padding-bottom: 20px;
+}
+.Links {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

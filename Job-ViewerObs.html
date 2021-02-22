@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Here are the Offers!</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+      function SBopen(){
+        document.getElementById("Var_C").style.display = "block";
+      }
+      function SBcloser(){
+        document.getElementById("Var_C").style.display = "none";
+      }
+      var don= {
+        numb: 0,
+        Close_Open: function(){
+          switch(this.numb){
+            case 0:
+              SBopen();
+              this.numb = 1;
+              break;
+            case 1:
+              SBcloser();
+              this.numb = 0;
+              break;
+          }
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div class="Head-Con">
+      <button id="Open" type="button" name="opener" onclick="don.Close_Open()">H</button>
+      <header class="First">
+        <h1>Here are all your job offers</h1>
+        <p>Click on the button to see the offer description</p>
+      </header>
+    </div>
+    <div class="P_Container">
+      <div id="Var_C"
+        <nav class="Var">
+          <p>Tot</p>
+        </nav>
+      </div>
+      <article class="Place">
+        <h2>This is where the page will appear</h2>
+        <p>Just click on one of the links of the SideBar</p>
+      </article>
+    </div>
+  </body>
+</html>

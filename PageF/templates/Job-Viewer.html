@@ -1,0 +1,74 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Here are the Offers!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="Head-Con">
+      <button id="Open" type="button" name="opener" onclick="don.Close_Open()">H</button>
+      <header class="First">
+        <h1>Here are all your job offers</h1>
+        <p>Click on the button to see the offer description</p>
+      </header>
+    </div>
+    <div class="P_Container">
+      <div id="Var_C"
+        <nav class="Var">
+          <ul id="ThisFBar">
+
+          </ul>
+        </nav>
+      </div>
+      <article class="Place">
+        <h2>This is where the page will appear</h2>
+        <p>Just click on one of the links of the SideBar</p>
+      </article>
+    </div>
+  </body>
+</html>
+<script>
+  var websites = {{ all |tojson |safe }};
+  console.log(typeof(websites));
+  console.log(websites["ct"])
+  for (var key in websites){
+    if(websites.hasOwnProperty(key)){
+      var LIs = document.createElement("LI");
+      LIs.innerHTML = key;
+      document.getElementById("ThisFBar").appendChild(LIs);
+      var LUS = document.createElement("UL");
+      LUS.className= key + "_Super"
+      document.getElementById("ThisFBar").appendChild(LUS);
+      for (var pages in websites[key]){
+        var LIst = document.createElement("LI");
+        LIst.innerHTML = websites[key][pages][0];
+        LIst.className= "Links " + key
+        LIst.style.paddingTop,
+        LIst.style.paddingBottom = "10px";
+        document.getElementsByClassName(key + "_Super")[0].appendChild(LIst)
+      }
+
+    }
+  };
+  function SBopen(){
+    document.getElementById("Var_C").style.display = "block";
+  };
+  function SBcloser(){
+    document.getElementById("Var_C").style.display = "none";
+  };
+  var don= {
+    numb: 0,
+    Close_Open: function(){
+      switch(this.numb){
+        case 0:
+          SBopen();
+          this.numb = 1;
+          break;
+        case 1:
+          SBcloser();
+          this.numb = 0;
+          break;
+      }
+    }
+  };
+</script>

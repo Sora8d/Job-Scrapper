@@ -1,7 +1,7 @@
-import requests, time
+import requests, time, json
 from bs4 import BeautifulSoup
 
-#This one works as a marker for times whn "junior" appear
+#This one works as a marker for times when "junior" appear
 def jr(l):
     l=l.lower()
     if "jr" in l or "junior" in l:
@@ -15,7 +15,10 @@ def jr(l):
 def searcher(dicturls, dictusage):
     total_len= 0
     total_jr= 0
+    Web_Links= {}
     for x, y in dicturls.items():
+        T_L= 0
+        Web_Links[x] = []
         print(x)
         last_first= set()
         checker = set()
@@ -46,8 +49,11 @@ def searcher(dicturls, dictusage):
                 checker= checker.symmetric_difference(last_first)
                 last_first = last_first.union(checker)
                 for z in checker:
+                    isthisjr=jr(z)
+                    total_jr +=  isthisjr
+                    T_L+=1
                     total_len+=1
-                    total_jr += jr(z)
+                    Web_Links[x].append([z, dictusage[x][2] + job_offers[z], isthisjr])
                     print(z)
                     print(dictusage[x][2] + job_offers[z])
 #Now this is where stuff gets messy, since every site has an unique way of going to the next page, there are explicit instructions for every site
@@ -57,8 +63,10 @@ def searcher(dicturls, dictusage):
                 continue
             elif action == "Stop":
                 break
-        print(str(total_len) + " jobs were discovered")
-        print(str(total_jr) + " jr discovered")
+        print(str(T_L) + " jobs were discovered")
+        print(str(total_jr) + " jr discovered in total")
+    print(f"At the end {total_len} job offers were discovered and {total_jr} were juniors")
+    return Web_Links
 
 #This one changes pages to the next one according to how the pages work
 def pages_jb(bsobject, page, website, url):
@@ -97,8 +105,6 @@ def pages_ct(*args):
 
 
 
-
-
 notyet='""opem":"https://www.opcionempleo.com.ar/empleo-web-developer/cordoba-113878.html""', '"zj": "https://www.zonajobs.com.ar/cordoba/ofertas-de-empleo-categoria-tecnologia.html",'
 urls={
 "i": "https://ar.indeed.com/Empleos-de-Software-developer-en-C%C3%B3rdoba,-C%C3%B3rdoba",
@@ -116,4 +122,6 @@ usage={
 "tr": ["item-info", "h4", "", pages_tr],
 "jb": ["_31572 _07ebc", "h2", "ar.jooble.org", pages_jb],
 }
-searcher(urls, usage)
+Web_Links = searcher(urls, usage)
+with open("PageF/JSON.txt", "w") as JS:
+    json.dump(Web_Links, JS)
