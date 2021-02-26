@@ -9,3 +9,6 @@ with open("PageF/JSON.txt", "r") as J:
 @app.route('/index')
 def i():
     return render_template("Job-Viewer.html", all=Dander)
+@app.route("/placeholder")
+def p():
+    return render_template("placeholder.html")

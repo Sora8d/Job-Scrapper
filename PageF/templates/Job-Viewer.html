@@ -1,4 +1,4 @@
-<html lang="en" dir="ltr">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Here are the Offers!</title>
@@ -6,23 +6,21 @@
   </head>
   <body>
     <div class="Head-Con">
-      <button id="Open" type="button" name="opener" onclick="don.Close_Open()">H</button>
+      <button id="Open" type="button" name="opener" onclick='Close_Open("Var_C")'>H</button>
       <header class="First">
         <h1>Here are all your job offers</h1>
         <p>Click on the button to see the offer description</p>
       </header>
     </div>
     <div class="P_Container">
-      <div id="Var_C"
+      <div id="Var_C" class="0">
         <nav class="Var">
           <ul id="ThisFBar">
-
           </ul>
         </nav>
       </div>
       <article class="Place">
-        <h2>This is where the page will appear</h2>
-        <p>Just click on one of the links of the SideBar</p>
+        <iframe id="ifram" src="placeholder" name="Gohere"></iframe>
       </article>
     </div>
   </body>
@@ -32,43 +30,65 @@
   console.log(typeof(websites));
   console.log(websites["ct"])
   for (var key in websites){
+/* Now were getting the website*/
     if(websites.hasOwnProperty(key)){
       var LIs = document.createElement("LI");
       LIs.innerHTML = key;
+      LIs.setAttribute("onclick", `Close_Open("${key}_Super")`);
       document.getElementById("ThisFBar").appendChild(LIs);
       var LUS = document.createElement("UL");
-      LUS.className= key + "_Super"
+      LUS.id= key + "_Super"
+      LUS.style.display= "none";
+      LUS.className= "0";
       document.getElementById("ThisFBar").appendChild(LUS);
       for (var pages in websites[key]){
+/*This is the last part that gets every page from a website Key */
         var LIst = document.createElement("LI");
+/*Styling every single item */
+        if (websites[key][pages][2] ==1) {
+          LIst.style.backgroundColor= "#d18b00";
+        };
         LIst.innerHTML = websites[key][pages][0];
-        LIst.className= "Links " + key
+        LIst.className= "Links " + key;
         LIst.style.paddingTop,
         LIst.style.paddingBottom = "10px";
-        document.getElementsByClassName(key + "_Super")[0].appendChild(LIst)
+/*Adding functionality and placing it */
+        LIst.setAttribute("onclick", `Ffis("${websites[key][pages][1]}", "${key}_Super")`);
+        document.getElementById(key + "_Super").appendChild(LIst);
       }
+    }
+  };
+/*This function is for every single link, */
+function Ffis(Zalink, C_O){
+  linkviewer(Zalink);
+  Close_Open(C_O);
+  Close_Open("Var_C");
+};
 
+/*This Object acts as a function that toggles the sidebars */
+
+  function Close_Open(Sidebar){
+    Sidebar = document.getElementById(Sidebar);
+    switch(Sidebar.className){
+      case "0":
+        Sidebar.style.display = "block";
+        Sidebar.className = 1;
+        break;
+      case "1":
+        Sidebar.style.display = "none";
+        Sidebar.className = 0;
+        break;
+      default:
+        console.log("DAAA")
+        console.log(Sidebar.className)
     }
-  };
-  function SBopen(){
-    document.getElementById("Var_C").style.display = "block";
-  };
-  function SBcloser(){
-    document.getElementById("Var_C").style.display = "none";
-  };
-  var don= {
-    numb: 0,
-    Close_Open: function(){
-      switch(this.numb){
-        case 0:
-          SBopen();
-          this.numb = 1;
-          break;
-        case 1:
-          SBcloser();
-          this.numb = 0;
-          break;
-      }
+  }
+/*This function gives the link a base URI and puts them on the iframe */
+  function linkviewer(link){
+    if (link[0] != "h"){
+      link= "https://" + link
     }
+    var frame=document.getElementById("ifram");
+    frame.src=link;
   };
 </script>

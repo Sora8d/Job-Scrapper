@@ -4,7 +4,7 @@
   box-sizing: content-box;
 }
 body{
-  height: 2000px;
+  height: 100vw;
 }
 .Head-Con{
   display: flex;
@@ -25,20 +25,30 @@ body{
   flex-grow: 0.5;
 }
 #Var_C{
+  position: relative;
   display: none;
   width: 15vw;
   background-color: #9f8cd4;
+  max-height: 90vw;
+  z-index:2;
 }
 .Var{
-  position: fixed;
+  overflow-y: scroll;
 }
 .Place{
+  position: absolute;
+  top: 10vw;
+  width: 90vw;
   padding: 50px;
+  z-index:1;
 }
-.Place > h2{
-  padding-bottom: 20px;
-}
+
 .Links {
   padding-top: 5px;
   padding-bottom: 5px;
+}
+iframe{
+  height: 80vw;
+  width: 100%;
+  z-index: 1
 }
