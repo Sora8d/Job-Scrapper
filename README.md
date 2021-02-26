@@ -1,6 +1,8 @@
 # Job-Scrapper
 Just a small Web-Scrapper that plays with bs4 and html.
 
+Changes: 26/02/21 19:18hs
+
 ///Deleted Job-ViewerObs.html
 Obsolete
 
