@@ -13,13 +13,14 @@
       </header>
     </div>
     <div class="P_Container">
-      <div id="Var_C" class="0">
+      <div class="Var_C" id="0">
         <nav class="Var">
           <ul id="ThisFBar">
           </ul>
         </nav>
       </div>
       <article class="Place">
+        <a href="placeholder" class="DLink">Open Link</a>
         <iframe id="ifram" src="placeholder" name="Gohere"></iframe>
       </article>
     </div>
@@ -27,68 +28,82 @@
 </html>
 <script>
   var websites = {{ all |tojson |safe }};
-  console.log(typeof(websites));
-  console.log(websites["ct"])
   for (var key in websites){
 /* Now were getting the website*/
     if(websites.hasOwnProperty(key)){
       var LIs = document.createElement("LI");
       LIs.innerHTML = key;
-      LIs.setAttribute("onclick", `Close_Open("${key}_Super")`);
+      LIs.id= key+"list"
+      LIs.setAttribute("onclick", `Close_Open("${key}")`);
       document.getElementById("ThisFBar").appendChild(LIs);
+/*Now we have the title of every sublist*/
       var LUS = document.createElement("UL");
-      LUS.id= key + "_Super"
-      LUS.style.display= "none";
-      LUS.className= "0";
+      LUS.className= "Zabar " + key;
+      LUS.id= "0";
       document.getElementById("ThisFBar").appendChild(LUS);
+/*Here is the container for every item*/
       for (var pages in websites[key]){
 /*This is the last part that gets every page from a website Key */
         var LIst = document.createElement("LI");
-/*Styling every single item */
         if (websites[key][pages][2] ==1) {
           LIst.style.backgroundColor= "#d18b00";
-        };
+        }; // This marks if a page contains Junior
         LIst.innerHTML = websites[key][pages][0];
-        LIst.className= "Links " + key;
-        LIst.style.paddingTop,
-        LIst.style.paddingBottom = "10px";
+        LIst.className= "Items";
 /*Adding functionality and placing it */
-        LIst.setAttribute("onclick", `Ffis("${websites[key][pages][1]}", "${key}_Super")`);
-        document.getElementById(key + "_Super").appendChild(LIst);
+        LIst.setAttribute("onclick", `Ffis("${websites[key][pages][1]}", "${key}")`);
+        document.getElementsByClassName(key)[0].appendChild(LIst);
       }
     }
   };
-/*This function is for every single link, */
+/*To update the css to style all the elements*/
+var links = document.getElementsByTagName("link")[0];
+links.href = links.href + "?id=" + new Date().getMilliseconds();
+/*This function is for every single link*/
 function Ffis(Zalink, C_O){
   linkviewer(Zalink);
   Close_Open(C_O);
   Close_Open("Var_C");
 };
 
-/*This Object acts as a function that toggles the sidebars */
-
+/*This Object acts as a function that toggles the sidebars
+case 0 "opens" the selected side bar, changes the color of the title to active, and closes every other list*/
+get
   function Close_Open(Sidebar){
-    Sidebar = document.getElementById(Sidebar);
-    switch(Sidebar.className){
+    Sidebar = document.getElementsByClassName(Sidebar)[0];
+    switch(Sidebar.id){
       case "0":
+/*This part closes other open sublists*/
+        var SONS= document.getElementById("ThisFBar").childNodes;
+        for (i=0; i<SONS.length; i++){
+          if (SONS[i].nodeName == "UL" && SONS[i].id == "1"){
+            Close_Open(SONS[i].className);
+          };
         Sidebar.style.display = "block";
-        Sidebar.className = 1;
+        Sidebar.id = 1;
+        if (Sidebar.className != "Var_C"){
+          document.getElementById(Sidebar.className.slice(6)+"list").style.backgroundColor= "#b599de";
+          }
+        }
         break;
       case "1":
         Sidebar.style.display = "none";
-        Sidebar.className = 0;
+        Sidebar.id = 0;
+        if (Sidebar.className != "Var_C"){
+          document.getElementById(Sidebar.className.slice(6)+"list").style.backgroundColor= "#8e74b5";
+        }
         break;
-      default:
-        console.log("DAAA")
-        console.log(Sidebar.className)
     }
   }
-/*This function gives the link a base URI and puts them on the iframe */
+/*This function gives the link a base URI and puts them on the iframe and the link alternative */
   function linkviewer(link){
     if (link[0] != "h"){
       link= "https://" + link
     }
     var frame=document.getElementById("ifram");
     frame.src=link;
+    var frame=document.getElementsByClassName("DLink")[0];
+    frame.href=link;
+
   };
 </script>

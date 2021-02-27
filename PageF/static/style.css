@@ -6,6 +6,10 @@
 body{
   height: 100vw;
 }
+a{
+  color: #b3b3b3;
+  text-decoration: none;
+}
 .Head-Con{
   display: flex;
   width: 100%;
@@ -24,16 +28,24 @@ body{
 #Open {
   flex-grow: 0.5;
 }
-#Var_C{
+.Var_C{
   position: relative;
   display: none;
   width: 15vw;
-  background-color: #9f8cd4;
-  max-height: 90vw;
   z-index:2;
+  height: 90vw;
+  background-color: #9f8cd4;
+  border-right: 3px solid #000
 }
-.Var{
-  overflow-y: scroll;
+#ThisFBar > li{
+  display: block;
+  padding-top: 10px;
+  height: 30px;
+  text-align: center;
+  background-color: #8e74b5;
+}
+#ThisFBar > li:hover{
+  background-color: #b599de;
 }
 .Place{
   position: absolute;
@@ -42,10 +54,28 @@ body{
   padding: 50px;
   z-index:1;
 }
+.DLink{
+  display: block;
+  text-align: center;
+  width: 100%;
+  background-color: #2931B3;
+}
 
-.Links {
-  padding-top: 5px;
+.Items{
+  background-color: #8e74b5;
+  padding-top,
   padding-bottom: 5px;
+  border-top: 2px solid;
+  border-color: #303030;
+}
+.Zabar{
+  display: none;
+  position: absolute;
+  overflow-y: scroll;
+  left: 15vw;
+  top: 0px;
+  max-height: 90vw;
+  z-index: 3;
 }
 iframe{
   height: 80vw;
