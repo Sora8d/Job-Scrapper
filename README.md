@@ -23,3 +23,14 @@ Now every link makes an iframe.
 Things to take care:
 -Fix Sidebar Scroll of items adding max-height, add style and design.
 -Add a link as an alternative to the i frame. 
+
+Changes: 27/02/21 20:55hs
+
+///modified PageF/static/style.css 
+Finished adding all the option so page doesnt look horrendous.
+
+///modified PageF/templates/Job-Viewer.html 
+-Made lists functional.
+-Added alternative so links can be opened on browser
+-Changed functionality of opening and closing tabs. Now opening a tab closes all the others. 
+
